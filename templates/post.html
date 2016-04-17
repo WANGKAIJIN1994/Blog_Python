@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8"/>
+    <title>王凯的博客</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename = 'wk_blog.css')}}"/>
+    <link rel="shortcut icon" type="image/x-icon" href=""/>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <a href="{{ url_for('index') }}">王凯的博客</a>
+        </div>
+        <nav class="nav">
+            <ul>
+                {% for info in catalogue %}
+                <li><a href="{{ url_for('catalogue',Id = info[0]) }}">{{ info[1] }}</a></li>
+                {% endfor %}
+            </ul>
+        </nav>
+    </header>
+    <div class="wrap">
+        <aside class="sidebar">
+            <!--这里是文章名-->
+            <ul>
+                {% for info in PostTi %}
+                <li><a href="{{ url_for('post',Id = info[0]) }}">{{ info[1] }}</a></li>
+                {% endfor %}
+            </ul>
+            <!--这里是侧栏模块-->
+            <div class="side_div">
+                这里是侧栏模块
+            </div>
+            <div class="side_div">
+                这里是侧栏模块
+            </div>
+            <div class="side_div">
+                这里是侧栏模块
+            </div>
+        </aside>
+        <div class="content">
+            <article class="post">
+                <p>{{ post[1] }}</p><p>{{ moment(post[2]).format('LLLL') }}</p>
+                <div id="navigation"><ul><li> <a href=" ">1</a> </li><li> <a href=" ">1</a> </li><li> <a href=" ">1</a> </li><li> <a href=" ">1</a> </li><li> <a href=" ">1</a> </li><li> <a href=" ">1</a> </li><li> <a href=" ">1</a> </li><li> <a href=" ">1</a> </li><li> <a href=" ">1</a> </li></ul></div>
+                {{ post[3] }}
+            </article>
+            <div class="comments">
+                <article class="post">
+                    <p> <span>users</span> <span>2015-5-6 20:20:20</span></p>
+                    这里是comments<br/>这里是comments是comments<br/>这里是comm是comments<br/>这里是comm
+                </article>
+                <article class="post">
+                    <p> <span>users</span> <span>2015-5-6 20:20:20</span></p>
+                    这里是comments<br/>这里是comments是comments<br/>这里是comm是comments<br/>这里是comm
+                </article>
+                <article class="post">
+                    <p> <span>users</span> <span>2015-5-6 20:20:20</span></p>
+                    这里是comments<br/>这里是comments是comments<br/>这里是comm是comments<br/>这里是comm
+                </article>
+            </div>
+            
+            <form id="form_comment" action="" method="POST">
+                <textarea class="com_con input all_radius" name="comcontent" placeholder="请留言..." form="form_comment" rows="3" wrap="virtual"></textarea>
+                <input onkeydown="switchline(event)" class="user input all_radius" type="email" name="email" placeholder="请输入您的邮箱："/> 
+                <input onkeydown="switchline(event)" class="user input all_radius" type="password" name="password" placeholder="请输入您的密码："/> 
+                <input onkeydown="switchline(event)" class="check input all_radius" type="text" name="checknumber" placeholder="请输入验证码："/>
+                <input onkeydown="switchline(event)" class="abtain button all_radius" type="button" name="obtain" value="获取" onclick ="obtaincheck();"/>
+                <input onkeydown="switchline(event)" class="submit button all_radius" type ="submit" value="提交"/ onclick="return check();">   
+            </form>
+            
+        </div>
+    </div>
+    <footer class="footer">
+         这里是footer
+    </footer>
+<script type="text/javascript" src="{{ url_for('static',filename = 'jquery-2.2.3.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static',filename = 'wk_blog.js') }}" ></script>
+{{ moment.include_moment() }}
+{{ moment.lang('zh-cn') }}
+</body>
+</html>

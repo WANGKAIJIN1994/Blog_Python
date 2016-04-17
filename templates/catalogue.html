@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8"/>
+    <title>王凯的博客</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename = 'wk_blog.css')}}"/>
+    <link rel="shortcut icon" type="image/x-icon" href=""/>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <a href="{{ url_for('index') }}">王凯的博客</a>
+        </div>
+        <nav class="nav">
+            <ul>
+                {% for info in catalogue %}
+                <li><a href="{{ url_for('catalogue',Id = info[0]) }}">{{ info[1] }}</a></li>
+                {% endfor %}
+            </ul>
+        </nav>
+    </header>
+    <div class="wrap">
+        <aside class="isidebar">
+            <!--这里是侧栏模块-->
+            <div class="side_div">
+                这里是侧栏模块
+            </div>
+            <div class="side_div">
+                这里是侧栏模块
+            </div>
+            <div class="side_div">
+                <article class="post">
+                    <p> <span>users</span> <span>2015-5-6 20:20:20</span></p>
+                    这里是comments<br/>这里是comments是comments<br/>这里是comm是comments<br/>这里是comm
+                </article>
+                <article class="post">
+                    <p> <span>users</span> <span>2015-5-6 20:20:20</span></p>
+                    这里是comments<br/>这里是comments是comments<br/>这里是comm是comments<br/>这里是comm
+                </article>
+                <article class="post">
+                    <p> <span>users</span> <span>2015-5-6 20:20:20</span></p>
+                    这里是comments<br/>这里是comments是comments<br/>这里是comm是comments<br/>这里是comm
+                </article>
+            </div>
+        </aside>
+        <div class="icontent">
+            <!--这里是文章列表-->
+            <article class="post">
+                <p><span>title</span><span>catalogue</span><span>2016-3-5 12:02:20</span></p>
+                这里是content<br/><br/>br/><br/><b<br/><br/><br><br><br>这里是content
+            </article>
+            <article class="post">
+                <p><span>title</span><span>catalogue</span><span>2016-3-5 12:02:20</span></p>
+                这里是content<br/><br/>br/><br/><b<br/><br/><br><br><br>这里是content
+            </article>
+            <article class="post">
+                <p><span>title</span><span>catalogue</span><span>2016-3-5 12:02:20</span></p>
+                这里是content<br/><br/>br/><br/><b<br/><br/><br><br><br>这里是content
+            </article>
+            <article class="post">
+                <p><span>title</span><span>catalogue</span><span>2016-3-5 12:02:20</span></p>
+                这里是content<br/><br/>br/><br/><b<br/><br/><br><br><br>这里是content
+            </article>
+        </div>
+    </div>
+    <footer class="footer">
+         这里是footer
+    </footer>
+<script type="text/javascript">   </script>
+<script type="text/javascript" src="" ></script>
+</body>
+</html>
