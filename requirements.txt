@@ -1,0 +1,5 @@
+flask
+pymysql
+flask-wtf
+flask-mail
+flask-moment
