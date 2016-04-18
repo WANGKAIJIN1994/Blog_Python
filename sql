@@ -41,19 +41,22 @@ FOREIGN KEY(`UId`) REFERENCES PY_Users(`UId`)
 
 
 py_catalogue
-insert into py_catalogue(CaName) values('测试');
-insert into py_catalogue(CaName) values('测试');
-insert into py_catalogue(CaName) values('测试');
-insert into py_catalogue(CaName) values('测试');
+insert into py_catalogue(CaName) values('测试目录1');
+insert into py_catalogue(CaName) values('测试目录1');
+insert into py_catalogue(CaName) values('测试2');
+insert into py_catalogue(CaName) values('测试2');
+insert into py_catalogue(CaName) values('测试2');
 
 py_post
-insert into py_post(PTitle,PDate,PContent,CaId) values('测试','2015-12-13 24:00:00','nihaoslkdflalad<h1>你好</h1>','1');
-insert into py_post(PTitle,PDate,PContent,CaId) values('测试','2015-12-13 24:00:00','nihaoslkdflalad<h1>你好</h1>','1');
+insert into py_post(PTitle,Date,PContent,CaId) values('测试','2015-12-13 24:00:00','nihaoslkdflalad<h1>你好</h1>','1');
+insert into py_post(PTitle,Date,PContent,CaId) values('测试','2015-12-13 24:00:00','nihaoslkdflalad<h1>你好</h1>','1');
+insert into py_post(PTitle,Date,PContent,CaId) values('测试','2015-12-13 24:00:00','nihaoslkdflalad<h1>你好</h1>','2');
+insert into py_post(PTitle,Date,PContent,CaId) values('测试','2015-12-13 24:00:00','nihaoslkdflalad<h1>你好</h1>','2');
 
 py_users
-insert into py_users(UId,UName,UPassword) values('1173507862@qq.com','测试','wangkaijin');
+insert into py_users(UId,UPassword) values('1173507862@qq.com','wangkaijin');
 
 py_comments
-insert into py_comments(PId,UId,CoDate,CoContent) values('4','1173507862@qq.com','2015-12-13 4:20:00','这是测试的评论<h1>你好</h1>');
-insert into py_comments(PId,UId,CoDate,CoContent) values('4','1173507862@qq.com','2015-12-13 4:20:00','这是测试的评论<h1>你好</h1>');
-insert into py_comments(PId,UId,CoDate,CoContent) values('4','1173507862@qq.com','2015-12-13 4:20:00','这是测试的评论<h1>你好</h1>');
+insert into py_comments(PId,UId,Date,CoContent) values('1','1173507862@qq.com','2015-12-13 4:20:00','这是测试的评论<h1>你好</h1>');
+insert into py_comments(PId,UId,Date,CoContent) values('1','1173507862@qq.com','2015-12-13 4:20:00','这是测试的评论<h1>你好</h1>');
+insert into py_comments(PId,UId,Date,CoContent) values('1','1173507862@qq.com','2015-12-13 4:20:00','这是测试的评论<h1>你好</h1>');

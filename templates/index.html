@@ -29,44 +29,27 @@
                 这里是侧栏模块
             </div>
             <div class="side_div">
+                {% for info in comments %}
                 <article class="post">
-                    <p> <span>users</span> <span>2015-5-6 20:20:20</span></p>
-                    这里是comments<br/>这里是comments是comments<br/>这里是comm是comments<br/>这里是comm
+                    <p> <span><a href="{{ url_for('post',Id = info[1]) }}">{{info[2]}}</a></span> <span>{{ moment(info[3]).format('MMMDoH:M') }}</span></p>{{ info[4] }}
                 </article>
-                <article class="post">
-                    <p> <span>users</span> <span>2015-5-6 20:20:20</span></p>
-                    这里是comments<br/>这里是comments是comments<br/>这里是comm是comments<br/>这里是comm
-                </article>
-                <article class="post">
-                    <p> <span>users</span> <span>2015-5-6 20:20:20</span></p>
-                    这里是comments<br/>这里是comments是comments<br/>这里是comm是comments<br/>这里是comm
-                </article>
+                {% endfor %}
             </div>
         </aside>
         <div class="icontent">
             <!--这里是文章列表-->
+            {% for info in posts %}
             <article class="post">
-                <p><span><a href="{{ url_for('post',Id = 2) }}">title</a></span><span><a href="catalogue">catalogue</a></span><span>2016-3-5 12:02:20</span></p>
-                这里是content<br/><br/>br/><br/><b<br/><br/><br><br><br>这里是content<a href="post">查看</a>
+                <p><span><a href="{{ url_for('post',Id = info[0]) }}">{{info[1]}}</a></span><span>{{ moment(info[2]).format('LLL') }}</span></p>{{ info[3] }}
             </article>
-            <article class="post">
-                <p><span><a href="{{ url_for('post',Id = 3) }}">title</a></span><span><a href="catalogue">catalogue</a></span><span>2016-3-5 12:02:20</span></p>
-                这里是content<br/><br/>br/><br/><b<br/><br/><br><br><br>这里是content<a href="post">查看</a>
-            </article>
-             <article class="post">
-                <p><span><a href="{{ url_for('post',Id = '4') }}">title</a></span><span><a href="catalogue">catalogue</a></span><span>2016-3-5 12:02:20</span></p>
-                这里是content<br/><br/>br/><br/><b<br/><br/><br><br><br>这里是content<a href="post">查看</a>
-            </article>
-            <article class="post">
-                <p><span><a href="{{ url_for('post',Id = 5) }}">title</a></span><span><a href="catalogue">catalogue</a></span><span>2016-3-5 12:02:20</span></p>
-                这里是content<br/><br/>br/><br/><b<br/><br/><br><br><br>这里是content<a href="post">查看</a>
-            </article>
+            {% endfor %}
         </div>
     </div>
     <footer class="footer">
          这里是footer
     </footer>
-<script type="text/javascript">   </script>
-<script type="text/javascript" src="" ></script>
+<script type="text/javascript" src="{{ url_for('static',filename = 'jquery-2.2.3.min.js') }}"></script>
+{{ moment.include_moment() }}
+{{ moment.lang('zh-cn') }}
 </body>
 </html>

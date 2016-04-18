@@ -59,7 +59,6 @@ class Models:
             DROP TABLE IF EXISTS `PY_Catalogue`;'
             sql2 = 'create table `PY_Users` (\
             `UId` varchar(50) NOT NULL,\
-            `UName` varchar(50) NOT NULL,\
             `UPassword` varchar(50) NOT NULL,\
             PRIMARY KEY(`UId`)\
             )DEFAULT CHARSET = utf8;'
@@ -71,7 +70,7 @@ class Models:
             sql4 = 'create table `PY_Post` (\
             `PId` int(4) NOT NULL AUTO_INCREMENT,\
             `PTitle` varchar(255),\
-            `PDate` datetime NOT NULL,\
+            `Date` datetime NOT NULL,\
             `PContent` text NOT NULL,\
             `CaId` int(4) NOT NULL,\
             PRIMARY KEY(`PId`),\
@@ -81,7 +80,7 @@ class Models:
             `CoId` int(4) NOT NULL AUTO_INCREMENT,\
             `PId` int(4) NOT NULL,\
             `UId` varchar(50) NOT NULL,\
-            `CoDate` datetime NOT NULL,\
+            `Date` datetime NOT NULL,\
             `CoContent` text NOT NULL,\
             PRIMARY KEY(`CoId`),\
             FOREIGN KEY(`PId`) REFERENCES PY_Post(`PId`),\
@@ -100,9 +99,9 @@ class Models:
         except:
             traceback.print_exc()
 
-    #根据Id查该表所有信息(文章，评论，目录)
+    #根据PId查所有信息(文章，评论,文章列表)
     def selectAll(self,Id,IdName,TABLE):
-        sql ='select * from ' + TABLE + ' where ' + IdName + ' = ' + str(Id)     
+        sql ='select * from ' + TABLE + ' where ' +  IdName + ' = ' + str(Id) + ' order by date Desc'
         return self.query(sql)
 
     #根据CaId查文章的ID和相应的title
@@ -110,15 +109,17 @@ class Models:
         sql ='select `PId`,`PTitle` from  PY_Post  where  CaId = ' + str(Id)   
         return self.query(sql)
 
-    def selectCa(self):
-        sql = 'select * from PY_Catalogue'
+    #查询所有目录,评论,文章
+    def selectA(self,TABLE):
+        sql = 'select * from '+ TABLE
         return self.query(sql)
+
 
 if __name__ == '__main__':
     mode = Models()
     print('success')
-    print(mode.selectAll('8','PId','PY_Post'))
-    print(mode.selectAll('4','PId','PY_Comments'))
-    print(mode.selectAll('4','CaId','PY_Catalogue'))
+    print(mode.selectAll('1','PId','PY_Post'))
+    print(mode.selectAll('1','PId','PY_Comments'))
+    print(mode.selectAll('1','CaId','PY_Post'))
     print(mode.selectCa())
     print(mode.selectPT('1'))
