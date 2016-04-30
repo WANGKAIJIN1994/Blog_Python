@@ -1,4 +1,4 @@
-var checknumber;
+var checknumber = document.getElementById("form_comment").obtain.value;
 
 var XMLHttp = {
     XMLHttpRequestPool:[],
@@ -37,7 +37,7 @@ var XMLHttp = {
         }
         return objXMLHttp;
     },
-    sendRequest:function(method,url,date){
+    sendRequest:function(method,url,date,callback){
         var objXMLHttp = this.getInstance();
         with(objXMLHttp){
             try{
@@ -57,7 +57,7 @@ var XMLHttp = {
                 }
                 onreadystatechange = function(){
                     if(objXMLHttp.readyState == 4 && (objXMLHttp.status == 200||objXMLHttp.status==304)){
-                        checknumber = objXMLHttp.responseText;
+                        callback.call(null,objXMLHttp);
                     }
                 }
             }
@@ -66,38 +66,51 @@ var XMLHttp = {
     }
 };
 
+function changenumber(objXMLHttp){
+    checknumber = objXMLHttp.responseText;
+    document.getElementById("form_comment").obtain.value = checknumber;
+}
+
 function obtaincheck(){
-        XMLHttp.sendRequest("GET","obtaincheck","")
+    XMLHttp.sendRequest("GET","/obtainnumber","",changenumber);
 }
 
-
-function check(){
-    if(form_comment.comcontent.value ==""){
-        alert("please enter the comments");
-        return false;  
-    }
-    
-    var reg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
-    if(!reg.test(form_comment.email.value)){
-        alert("please enter the right email");
-        return false;
-    }
-
-    if(form_comment.password.value == ""){
-        alert("please enter the password");
-        return false;
-    }
-
-    if(form_comment.checknumber.value != checknumber){
-        alert("the checknumber is wrong!");
-        return false;
-    }
+function showloginpage(){
+    document.getElementById('display').style.display = 'block';
+    document.getElementById('showloginpage').style.zIndex = 100;
+    document.getElementById('showloginpage').style.display = 'block';
 }
 
-function switchline(event){
+function closeloginpage(){
+    document.getElementById('display').style.display = 'none';
+    document.getElementById('showloginpage').style.zIndex = 0;
+    document.getElementById('showloginpage').style.display = 'none';
+}
+
+function show_Login(){
+    document.getElementById("setRegister").innerHTML = "";
+    document.getElementById("form_login").action = "/login";
+    document.getElementById("login").style.fontSize = "17px";
+    document.getElementById("register").style.fontSize = "15px";
+    document.getElementById("display").style.height = "230px";
+    document.form_login.button.setAttribute("value","Sign In");
+    document.form_login.button.setAttribute("onclich","login()");
+}
+
+function show_Register(){
+    document.getElementById("setRegister").innerHTML = '<input onkeydown="switchline(event,form_login)" class="input all_radius" type="password" name="confirm" placeholder="confirm password:"/>';
+    document.getElementById("register").style.fontSize = "17px";
+    document.getElementById("login").style.fontSize = "15px";
+    document.getElementById("form_login").action = "/register";
+    document.getElementById("display").style.height = "270px";
+    document.form_login.button.setAttribute("value","register");
+    document.form_login.button.setAttribute("onclich","register()");
+}
+
+function switchline(event,formID){
     var keyCode = event.keyCode;
     if(keyCode == 13||keyCode == 39){
-        var inputs = document.getElementById('form_comment').getElementsByTagName('input');
+        var inputs = formID.getElementsByTagName('input');
         var input = document.getElementsByName(document.activeElement.name)[0];
         var count = 0;
         (function(){
@@ -112,4 +125,56 @@ function switchline(event){
         event.preventDefault();
     }
 }
+
+function check(formID){
+    if(formID.comcontent != undefined && formID.comcontent.value == ""){
+        alert("please enter the comments");
+        return false;  
+    }
+    
+    var reg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+    if(!reg.test(formID.email.value)){
+        alert("please enter the right email");
+        return false;
+    }
+
+    if(formID.password.value == ""){
+        alert("please enter the password");
+        return false;
+    }
+
+    if(formID.confirm != undefined){
+        if(formID.confirm.value != formID.password.value){
+            alert("The two passwords do not match");
+            return false;
+        }
+    }
+
+    if(formID.checknumber != undefined){
+        if(formID.checknumber.value != checknumber){
+            alert("the checknumber is wrong!");
+            return false;
+        }
+    }
+    return true;
+}
+
+function login(){
+    if(check(form_login) == true){
+        XMLHttp.sendRequest("POST","/login","wangkai",loginshow);
+    }
+    return false;
+}
+
+function loginshow(objXMLHttp){
+    alert(objXMLHttp.responseText);
+}
+
+function register(){
+    if(check(form_login) == true){
+        XMLHttp.sendRequest("POST","/register", $("form_login").serialize(),registershow);
+    }
+    return false;
+}
+
 

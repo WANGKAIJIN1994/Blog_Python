@@ -18,7 +18,21 @@
                 {% endfor %}
             </ul>
         </nav>
+        <div class="login" onclick="showloginpage()">登录</div>
     </header>
+    <div id="display" class="all_radius">
+        <div class="selectlog">
+            <div id="login" style="font-size:17px" class = "login_head" onclick="show_Login()">登录</div><div id="line"></div><div id="register" class = "login_head" onclick="show_Register()">注册</div>
+        </div>
+        <div class = "form_input">
+            <form id="form_login" action="/login" method="POST">            
+                <input onkeydown="switchline(event,form_login)" class="input all_radius" type="email" name="email" placeholder="please enter your email"/> 
+                <input onkeydown="switchline(event,form_login)" class="input all_radius" type="password" name="password" placeholder="please enter your password"/>
+                <div id="setRegister"></div> 
+                <input onkeydown="switchline(event,form_login)" class="input all_radius" type ="button" name = "button" value="Sign In"/ onclick="login()">
+            </form>
+        </div>
+    </div>
     <div class="wrap">
         <aside class="sidebar">
             <!--这里是文章名-->
@@ -52,21 +66,22 @@
                 </article>
                 {% endfor %}
             </div>
-            
-            <form id="form_comment" action="" method="POST">
-                <textarea class="com_con input all_radius" name="comcontent" placeholder="请留言..." form="form_comment" rows="3" wrap="virtual"></textarea>
-                <input onkeydown="switchline(event)" class="user input all_radius" type="email" name="email" placeholder="请输入您的邮箱："/> 
-                <input onkeydown="switchline(event)" class="user input all_radius" type="password" name="password" placeholder="请输入您的密码："/> 
-                <input onkeydown="switchline(event)" class="check input all_radius" type="text" name="checknumber" placeholder="请输入验证码："/>
-                <input onkeydown="switchline(event)" class="abtain button all_radius" type="button" name="obtain" value="获取" onclick ="obtaincheck();"/>
-                <input onkeydown="switchline(event)" class="submit button all_radius" type ="submit" value="提交"/ onclick="return check();">   
+            <form id="form_comment" action="{{url_for('comment')}}" method="POST">
+                <textarea class="com_con input all_radius" name="comcontent" placeholder="leave the massages..." form="form_comment" rows="5" wrap="virtual"></textarea>
+                <div class = "form_input">
+                    <input onkeydown="switchline(event,form_comment)" class="input all_radius" type="email" name="email" placeholder="please enter your email"/> 
+                    <input onkeydown="switchline(event,form_comment)" class="input all_radius" type="password" name="password" placeholder="please enter your password"/> 
+                    <input onkeydown="switchline(event,form_comment)" class="check input all_radius" type="text" name="checknumber" placeholder="enter check number"/>
+                    <input onkeydown="switchline(event,form_comment)" class="abtain all_radius" type="button" name="obtain" value="{{ checknum }}" onclick ="obtaincheck();"/>
+                    <input onkeydown="switchline(event,form_comment)" class="input all_radius" type ="submit" value="submit"/ onclick="return check(form_comment);"> 
+                </div>
             </form>
-            
         </div>
     </div>
     <footer class="footer">
          这里是footer
     </footer>
+    <div id="showloginpage" onclick="closeloginpage()"></div>
 <script type="text/javascript" src="{{ url_for('static',filename = 'jquery-2.2.3.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static',filename = 'wk_blog.js') }}" ></script>
 {{ moment.include_moment() }}

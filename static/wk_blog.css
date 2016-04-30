@@ -29,11 +29,6 @@ body{
     text-align: center;
 }
 
-.logo a:hover{
-    background-color:rgba(12,102,145,0.8);
-    color:rgba(255,255,255,0.7);
-}
-
 .nav{
     position:absolute;
     left:200px;
@@ -51,14 +46,32 @@ body{
     display:block;
     padding-left: 10px;
     padding-right: 10px;
-    height:45px;
-    line-height: 45px;
     color:rgba(255,255,255,1);
 }
 
-.nav ul li a:hover{
+.nav ul li a:hover,.logo a:hover,.login:hover{
     background-color:rgba(12,102,145,0.8);
     color:rgba(255,255,255,0.7);
+}
+
+.login{
+    color:rgba(255,255,255,1);
+    text-align: center;
+    position:absolute;
+    width:60px;
+    top:0;
+    right:0;
+}
+
+#showloginpage{
+    display:none;
+    width:100%;
+    height:100%;
+    z-index:0;
+    top:0;
+    left:0;
+    position:fixed;
+    background-color: rgba(13,13,13,0.7);
 }
 
 .wrap{
@@ -137,59 +150,40 @@ body{
     
 }
 
+.form_input{
+    float:right;
+    width:90%;
+    max-width: 300px;
+    margin-right:5%;
+}
 .all_radius{
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
 }
-
 .input{
     display: block;
     padding:2px;
-    margin-top: 5px;
-    border:1px solid rgba(23,23,23,1);
+    height:35px;
+    width:80%;
+    margin:5px auto;
+    border:1px solid rgba(123,213,123,1);
 }
-
+.check{
+    margin-left: 10%;
+    width:37%;
+}
+.abtain{
+    float:right;
+    margin-top:-44px;
+    margin-right:10%;
+    width:37%;
+    height:39px; 
+}
 .com_con{
     width:100%;
-}
-
-.user{
-    clear:both;
-    float:right;
-    max-width: 280px;
-    width:90%;
-    height:30px;
-}
-
-.button{
-    margin-top: 5px;
-    display: block;
-    border:0px;
-    float:right;
-    clear:both;
-}
-
-.check{
-    margin-right: 100px;
-    clear:both;
-    float:right;
-    max-width:180px;
-    width:40%;
-    height:30px;
-}
-
-.abtain{
-    margin-top: -36px;
-    width:90px;
-    height:36px; 
-}
-
-.submit{
-    height:40px; 
-    max-width:280px;
-    width:90%;
+    height:100px;
 }
 .footer{
     clear: both;
@@ -199,4 +193,38 @@ body{
     text-align: center;
     background-color: rgba(26,26,26,1);
     color:rgba(255,255,255,0.8);
+}
+
+#display{
+    display:none;
+    position:fixed;
+    background-color:rgba(255,250,250,1);
+    width:301px;
+    height:230px;
+    z-index:1000;
+    top:20%;
+    left:40%;
+}
+
+.selectlog{
+    height:50px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(150,150,150,1);
+}
+
+#line{
+    display:inline-block;
+    float:left;
+    width:1px;
+    height:50px;
+    background:rgba(150,150,150,1);
+}
+
+.login_head{
+    float:left;
+    width:150px;
+    line-height:50px;
+    text-align: center;
+    font-size: 15px;
+    cursor: pointer;
 }

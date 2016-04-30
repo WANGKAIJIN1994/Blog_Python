@@ -29,6 +29,15 @@ class Models:
         except:
             traceback.print_exc()
 
+    # 该函数用于将其自动转换为int并判断是否加''
+    def get_value_sql(val):
+        if isinstance(val, int):
+            return str(val)
+        if isinstance(val, str):
+            if str.isdigit(val):
+                return str(val)
+        return '"%s"' % val
+
     def query(self,sql):
         try:
           cur = self.conn.cursor()
@@ -101,18 +110,48 @@ class Models:
 
     #根据PId查所有信息(文章，评论,文章列表)
     def selectAll(self,Id,IdName,TABLE):
-        sql ='select * from ' + TABLE + ' where ' +  IdName + ' = ' + str(Id) + ' order by date Desc'
+        sql ='select * from ' + TABLE + ' where ' +  IdName + ' = ' + get_value_sql(Id) + ' order by date Desc'
         return self.query(sql)
 
     #根据CaId查文章的ID和相应的title
     def selectPT(self,Id):
-        sql ='select `PId`,`PTitle` from  PY_Post  where  CaId = ' + str(Id)   
+        sql ='select `PId`,`PTitle` from  PY_Post  where  CaId = ' + get_value_sql(Id)
         return self.query(sql)
 
     #查询所有目录,评论,文章
     def selectA(self,TABLE):
         sql = 'select * from '+ TABLE
         return self.query(sql)
+
+    #插入数据语句
+    def insert_sql(self,dict):
+        col = " "
+        val = " "
+        for k,v in dict.items():
+            col += k + ','
+            val += get_value_sql(Id) + ','
+        return '(' + col[:-1] + ')values(' + val[:-1] + ');'
+
+    #写文章，添加目录
+    def postcatalogue(self,dict,table):
+        if len(self.exe("insert into " + table + insert_sql(dict))) < 1:
+            return False
+        return True
+
+    #登录
+    def login(self,email,password):
+        passw = self.query("select `UPassword` from `PY_Users` where `UId` = " + email)
+        if password != passw[0]:
+            return False
+        return True
+
+    #注册
+    def register(self,dict):
+        if len(self.query("select * from `PY_Users` where `UId` = " + dict[0])) > 1:
+            return False
+        elif len(self.exe("insert into PY_Users" + insert_sql(dict))) < 1:
+            return False
+        return True
 
 
 if __name__ == '__main__':
@@ -121,5 +160,4 @@ if __name__ == '__main__':
     print(mode.selectAll('1','PId','PY_Post'))
     print(mode.selectAll('1','PId','PY_Comments'))
     print(mode.selectAll('1','CaId','PY_Post'))
-    print(mode.selectCa())
     print(mode.selectPT('1'))

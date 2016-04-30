@@ -18,7 +18,21 @@
                 {% endfor %}
             </ul>
         </nav>
+        <div class="login" onclick="showloginpage()">登录</div>
     </header>
+    <div id="display" class="all_radius">
+        <div class="selectlog">
+            <div id="login" style="font-size:17px" class = "login_head" onclick="show_Login()">登录</div><div id="line"></div><div id="register" class = "login_head" onclick="show_Register()">注册</div>
+        </div>
+        <div class = "form_input">
+            <form id="form_login" action="/login" method="POST">            
+                <input onkeydown="switchline(event,form_login)" class="input all_radius" type="email" name="email" placeholder="please enter your email"/> 
+                <input onkeydown="switchline(event,form_login)" class="input all_radius" type="password" name="password" placeholder="please enter your password"/>
+                <div id="setRegister"></div> 
+                <input onkeydown="switchline(event,form_login)" class="input all_radius" type ="button" name = "button" value="Sign In"/ onclick="login()">
+            </form>
+        </div>
+    </div>
     <div class="wrap">
         <aside class="isidebar">
             <!--这里是侧栏模块-->
@@ -48,7 +62,9 @@
     <footer class="footer">
          这里是footer
     </footer>
+    <div id="showloginpage" onclick="closeloginpage()"></div>
 <script type="text/javascript" src="{{ url_for('static',filename = 'jquery-2.2.3.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static',filename = 'wk_blog.js') }}" ></script>
 {{ moment.include_moment() }}
 {{ moment.lang('zh-cn') }}
 </body>
